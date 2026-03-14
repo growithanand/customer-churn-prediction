@@ -2,9 +2,9 @@
 
 ## Project Overview
 
-Customer churn is a major challenge for subscription-based businesses such as telecommunications companies. Acquiring new customers is significantly more expensive than retaining existing ones, making churn prediction an important business problem.
+Customer churn is a major challenge for subscription-based businesses such as telecommunications companies. Retaining existing customers is typically more cost-effective than acquiring new ones, making churn prediction an important business problem.
 
-This project analyzes telecom customer data to identify patterns associated with customer churn and builds machine learning models to predict whether a customer is likely to leave the service. The goal is to combine exploratory data analysis and predictive modeling to generate insights that can help businesses improve customer retention strategies.
+This project analyzes telecom customer data to identify patterns associated with churn and builds machine learning models to predict whether a customer is likely to leave the service. The analysis combines exploratory data analysis (EDA) and predictive modeling to generate insights that can support more effective customer retention strategies.
 
 ---
 
@@ -12,8 +12,8 @@ This project analyzes telecom customer data to identify patterns associated with
 
 The main objectives of this project are:
 
-- Analyze factors that influence customer churn
-- Perform exploratory data analysis to understand customer behavior
+- Analyze factors associated with customer churn
+- Perform exploratory data analysis to better understand customer behavior
 - Build classification models to predict churn
 - Improve model reliability using proper preprocessing and evaluation techniques
 - Translate model results into actionable business insights
@@ -22,9 +22,9 @@ The main objectives of this project are:
 
 ## Dataset
 
-The dataset used in this project is the **Telco Customer Churn dataset**.
+The project uses the **Telco Customer Churn dataset**, which contains customer-level information about telecom services.
 
-It contains customer-level information about telecom services, including:
+The dataset includes features such as:
 
 - Customer tenure
 - Contract type
@@ -40,7 +40,7 @@ It contains customer-level information about telecom services, including:
 **Churn**
 
 - **Yes** → Customer left the service  
-- **No** → Customer stayed with the service
+- **No** → Customer remained with the service
 
 ---
 
@@ -50,13 +50,13 @@ Exploratory Data Analysis (EDA) was performed to identify patterns related to cu
 
 ### Key Observations
 
-- Customers with **month-to-month contracts** churn more frequently.
-- **Low-tenure customers** show significantly higher churn rates.
-- Customers with **higher monthly charges** are more likely to leave the service.
-- **Fiber optic internet users** exhibit higher churn rates.
-- Customers using **electronic check payments** churn more often.
+- Customers with **month-to-month contracts** churn significantly more often
+- **Low-tenure customers** show higher churn probability
+- Customers with **higher monthly charges** are more likely to leave the service
+- **Fiber optic internet users** exhibit higher churn rates
+- Customers using **electronic check payments** churn more frequently
 
-These patterns suggest that contract flexibility, service cost, and payment methods play an important role in customer retention.
+These findings suggest that contract flexibility, pricing, and payment behavior play an important role in customer retention.
 
 ---
 
@@ -74,9 +74,7 @@ The preprocessing pipeline includes:
 - Splitting the dataset before preprocessing to prevent data leakage
 - Implementing transformations using **Scikit-Learn Pipeline and ColumnTransformer**
 
----
-
-## Models Implemented
+### Models Implemented
 
 Two classification models were implemented and evaluated:
 
@@ -89,7 +87,7 @@ Hyperparameter tuning was performed using **RandomizedSearchCV** to improve mode
 
 ## Model Evaluation
 
-Because churn prediction is an **imbalanced classification problem**, multiple evaluation metrics were used:
+Since churn prediction is an **imbalanced classification problem**, multiple evaluation metrics were used:
 
 - Accuracy
 - Precision
@@ -108,33 +106,33 @@ Threshold tuning was also applied to improve churn detection performance.
 
 ![Customer Churn Distribution](images/EDA_1.png)
 
-### Churn Analysis by Feature
+### Churn Patterns Across Key Features
 
 ![EDA Visualization](images/EDA_1.1.png)
 
-### ROC Curve
+### ROC and Precision-Recall Curves
 
-The ROC curve shows the trade-off between true positive rate and false positive rate for the churn prediction model.
+The ROC curve illustrates the trade-off between the true positive rate and false positive rate, while the Precision-Recall curve is particularly useful for evaluating performance on imbalanced classification problems.
 
-![ROC Curve](images/ROC.png)
+![ROC and PR Curves](images/ROC_&_PR_curves.png)
 
 ### Confusion Matrix
 
-The confusion matrix helps visualize how well the model distinguishes between churned and non-churned customers.
+The confusion matrix visualizes how well the model distinguishes between churned and non-churned customers.
 
 ![Confusion Matrix](images/confusion_matrix_visualization.png)
 
 ### Feature Importance
 
-The following plot highlights the most important features contributing to churn prediction.
+The following plot highlights the most influential features used by the model to predict churn.
 
-![Feature Importance](images/Frature_importance.png)
+![Feature Importance](images/Feature_importance.png)
 
 ---
 
 ## Model Interpretation
 
-Feature importance and model coefficients were analyzed to understand which factors contribute most strongly to churn.
+Model interpretation was used to identify the variables that contribute most strongly to churn predictions.
 
 Important predictors include:
 
@@ -144,7 +142,7 @@ Important predictors include:
 - Internet service type
 - Payment method
 
-These variables provide insights into customer behaviors that are most associated with churn risk.
+These variables provide insight into the customer characteristics most strongly associated with churn risk.
 
 ---
 
@@ -173,7 +171,7 @@ These strategies can help businesses reduce churn and improve customer lifetime 
 
 ## Repository Structure
 
-```
+```text
 customer-churn-prediction
 │
 ├── data
@@ -181,6 +179,13 @@ customer-churn-prediction
 │
 ├── notebooks
 │   └── churn_analysis.ipynb
+│
+├── images
+│   ├── EDA_1.png
+│   ├── EDA_1.1.png
+│   ├── ROC_&_PR_curves.png
+│   ├── confusion_matrix_visualization.png
+│   └── Frature_importance.png
 │
 ├── README.md
 ├── requirements.txt
@@ -204,25 +209,25 @@ customer-churn-prediction
 
 1. Clone the repository
 
-```
+```bash
 git clone https://github.com/growithanand/customer-churn-prediction.git
 ```
 
 2. Navigate to the project directory
 
-```
+```bash
 cd customer-churn-prediction
 ```
 
 3. Install dependencies
 
-```
+```bash
 pip install -r requirements.txt
 ```
 
-4. Launch Jupyter Notebook
+4. Launch the notebook
 
-```
+```bash
 jupyter notebook notebooks/churn_analysis.ipynb
 ```
 
@@ -230,9 +235,10 @@ jupyter notebook notebooks/churn_analysis.ipynb
 
 ## Limitations
 
-- The model relies only on the features available in the dataset.
-- External factors such as customer satisfaction or competitor pricing were not included.
-- Results may vary depending on dataset quality and real-world customer behavior.
+- The model relies only on the features available in the dataset
+- External factors such as customer satisfaction, service outages, or competitor actions were not included
+- Threshold tuning in the notebook is simplified and could be improved with a separate validation approach
+- Results may vary depending on dataset quality and real-world customer behavior
 
 ---
 
@@ -240,14 +246,13 @@ jupyter notebook notebooks/churn_analysis.ipynb
 
 Potential future enhancements include:
 
-- Testing advanced models such as **XGBoost or LightGBM**
-- Using **SHAP values** for deeper model interpretability
-- Building a **dashboard for churn monitoring**
-- Implementing **cost-sensitive churn optimization**
+- Testing advanced models such as **XGBoost** or **LightGBM**
+- Improving threshold selection using a dedicated validation set
+- Building a dashboard for churn monitoring
+- Exploring cost-sensitive churn optimization
 
 ---
 
 ## Author
 
 **Anand**
-
